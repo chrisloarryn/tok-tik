@@ -45,3 +45,4 @@ app.*.map.json
 
 ## ignore /assets/video/
 /assets/video/
+assets/videos/*
