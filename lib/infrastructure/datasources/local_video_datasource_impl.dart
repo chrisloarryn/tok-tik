@@ -1,22 +1,22 @@
-import 'package:flutter/material.dart';
+import 'package:toktik/domain/datasources/video_posts_datasource.dart';
 import 'package:toktik/domain/entities/video_post.dart';
 import 'package:toktik/infrastructure/models/local_video_models.dart';
 import 'package:toktik/shared/data/local_video_post.dart';
 
-class DiscoverProvider extends ChangeNotifier {
-  // TODO: Repository, DataSources (local, remote, etc)
-  bool initialLoading = true;
-  List<VideoPost> videos = [];
+class LocalVideoDatasourceImpl implements VideoPostDataSource {
+  @override
+  Future<List<VideoPost>> getFavoriteVideosByUser(String userId) {
+    throw UnimplementedError();
+  }
 
-  Future<void> loadNextPage() async {
+  @override
+  Future<List<VideoPost>> getTrendingVideosByPage(int page) async {
     await Future.delayed(const Duration(seconds: 2));
 
     final List<VideoPost> newVideos = videoPosts
         .map((video) => LocalVideoModel.fromJson(video).toVideoPostEntity())
         .toList();
 
-    videos.addAll(newVideos);
-    initialLoading = false;
-    notifyListeners();
+    return newVideos;
   }
 }
